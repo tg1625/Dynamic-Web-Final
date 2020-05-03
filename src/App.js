@@ -12,6 +12,11 @@ import Header from './components/Header';
 import UserProfile from './pages/UserProfile';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
+import Home from './pages/Home';
+import CreatePost from './pages/CreatePost';
+import UpdateProfile from './pages/UpdateProfile';
+import ViewPost from './pages/ViewPost';
+
 //styles
 import './App.css';
 
@@ -124,9 +129,22 @@ function App() {
       .catch(function(e) {
         console.log('CREATE ACCOUNT ERROR', e);
       });
+
+
+      //setting up the separate user profile
+      
   }
 
-  console.log("What are we?", loggedIn);
+  function UpdateProfileFunction(){
+    if(userInfo){
+      //referene the database
+      const db = firebase.firestore();
+      /*Get User*/
+      const user = db.collection("userProfile").doc(userInfo.uid); //same as db.collection("blogposts").doc("sample")
+    }
+  }
+
+  //console.log("Logged in?", loggedIn);
 
   return (
     <div className="siteWrapper">
@@ -137,10 +155,11 @@ function App() {
           {/* exact here makes it so the path thing doesnt cascade */}
           <Route exact path="/">
               {/*If not loading, can see the different pages */}
-              {
-              !loggedIn ? (<Redirect to="login"/>) : (<UserProfile userInfo={userInfo}/>)
+              {/* {
+              !loggedIn ? (<Redirect to="login"/>) : (<Home/>)
               //if not logged in log in, if logged in go to profile
-              }
+              } */}
+              <Home />
           </Route>
           <Route exact path="/login">
             { 
@@ -148,9 +167,32 @@ function App() {
             }
           </Route>
           <Route exact path="/create-account">
-            {
+            {/* {
             !loggedIn ? (<CreateAccount CreateAccountFunction={CreateAccountFunction}/>) : (<Redirect to="/"/>)
-            }
+            } */}
+            <CreateAccount CreateAccountFunction={CreateAccountFunction}/>
+          </Route>
+          <Route exact path="update-profile">
+            <UpdateProfile UpdateProfileFunction={UpdateProfileFunction}/>
+          </Route>
+          <Route exact path="/user">
+              {/*If not loading, can see the different pages */}
+              {/* {
+              !loggedIn ? (<Redirect to="login"/>) : (<UserProfile userInfo={userInfo}/>)
+              //if not logged in log in, if logged in go to profile
+              } */}
+              <UserProfile />
+          </Route>
+          <Route exact path="/post">
+            <ViewPost />
+          </Route>
+          <Route exact path="/createPost">
+              {/*If not loading, can see the different pages */}
+              {/* {
+              !loggedIn ? (<Redirect to="login"/>) : (<CreatePost />)
+              //if not logged in log in, if logged in go to profile
+              } */}
+              <CreatePost userInfo={userInfo} />
           </Route>
           
         </Switch>
