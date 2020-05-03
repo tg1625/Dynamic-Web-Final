@@ -33,7 +33,7 @@ function Post({post}){
     
     return (
        <div className="post">
-           <p>Author: <a href={`user/?user=${post.authorid}`}>{name}</a></p>
+           <p>Author: <a href={`/user/?user=${post.authorid}`}>{name}</a></p>
            {/* load photo if there is one */}
            {post.photo && <img alt="someting" src={`${post.photo}`}/>}
            <p>{post.text}</p>
