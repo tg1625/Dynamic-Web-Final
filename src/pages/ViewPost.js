@@ -45,7 +45,7 @@ function ViewPost(){
     return (
         <div>
             <h1>Post</h1>
-            <Post post={post}/>
+            <Post post={post} solo="true"/>
         </div>
     )
 

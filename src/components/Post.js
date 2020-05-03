@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-function Post({post}){
+function Post({post, solo}){
     //getting author of the post
     const [author, setAuthor] = useState({});
     useEffect(() =>{   
@@ -38,7 +38,9 @@ function Post({post}){
            {post.photo && <img alt="someting" src={`${post.photo}`}/>}
            <p>{post.text}</p>
            <p>Category: {post.category}</p>
+           {solo != "true" && 
            <p><a href={`post/?post=${post.postid}`}>View Post</a></p>
+            }
 
        </div>
     )
