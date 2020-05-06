@@ -57,8 +57,8 @@ function Home(){
     return (
         <div>
             <h1>Home Page</h1>
-            <div className="posts">
-                    {posts && posts.map((p,i) => (
+            <div className="postsWrapper">
+                    {posts && posts.slice(0).reverse().map((p,i) => (
                         <Post post={p} key={i}/>
                 ))}
                 </div>

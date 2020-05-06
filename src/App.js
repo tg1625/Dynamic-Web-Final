@@ -28,6 +28,7 @@ import * as firebase from "firebase/app";
 // Add the Firebase services that you want to use
 import "firebase/auth";
 import "firebase/firestore";
+import Axios from 'axios';
 
 function App() {
 
@@ -125,14 +126,14 @@ function App() {
       .then(function (response){
         console.log("Account Created", response);
         SetLoggedIn(true); //they are loged in now
+        window.location.href = "/";
       })
       .catch(function(e) {
         console.log('CREATE ACCOUNT ERROR', e);
       });
 
 
-      //setting up the separate user profile
-      
+      //setting up the separate user profile 
   }
 
   function UpdateProfileFunction(){
@@ -142,6 +143,25 @@ function App() {
       /*Get User*/
       const user = db.collection("userProfile").doc(userInfo.uid); //same as db.collection("blogposts").doc("sample")
     }
+  }
+
+
+  function CreatePostFunction(e){
+    e.preventDefault();
+    let text = e.currentTarget.postText.value;
+    let photoUrl = e.currentTarget.postPhotoURL.value;
+    let user = userInfo.uid;
+
+    Axios.get(
+      `https://nameless-fjord-65777.herokuapp.com/create?text=${text}&photo=${photoUrl}&authorid=${user}`
+    )
+    .then(function (response){
+      console.log(response);
+      window.location.href = "/";
+    })
+    .catch(function(error){
+      console.log(Error);
+    });
   }
 
   //console.log("Logged in?", loggedIn);
@@ -192,7 +212,7 @@ function App() {
               !loggedIn ? (<Redirect to="login"/>) : (<CreatePost />)
               //if not logged in log in, if logged in go to profile
               } */}
-              <CreatePost userInfo={userInfo} />
+              <CreatePost CreatePostFunction={CreatePostFunction} userInfo={userInfo} />
           </Route>
           
         </Switch>

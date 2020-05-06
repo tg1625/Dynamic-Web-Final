@@ -54,7 +54,7 @@ function UserProfile(){
     }, [user]);
 
     return (
-        <div>
+        <div className="profile">
             <h1>User Profile</h1>
             <img alt="Profile" src={`${profile.photoURL}`}/>
             <p>{profile.displayName}</p>

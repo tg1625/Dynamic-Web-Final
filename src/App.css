@@ -1,8 +1,18 @@
-.siteWrapper{
-  padding:10%;
+*{box-sizing: border-box;}
+
+body{
+  background-color:#efefef;
+  font-size:16px;
+  color:#444;
 }
 
+.siteWrapper{
+  max-width:768px;
+  margin:0 auto;
+  padding:20px;
+}
 
+/* ---- FORMS --- */
 .forms{
   max-width:500px;
   display:flex;
@@ -15,11 +25,13 @@
   line-height: 2em;
 }
 
+/*---- HEADER -----*/
 .header_nav{
   display:flex;
   max-width: width 1080px;
   margin:0 auto;
-
+  padding:20px 0px;
+  background-color: #fff;
 }
 
 .header_nav a{
@@ -27,3 +39,39 @@
   display:block;
   margin:10px;
 }
+
+
+/*---- Posts Wrapper --- */
+.post{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  padding:20px;
+  background-color: #fff;
+  margin-bottom:20px;
+}
+
+.post .author {
+  height: 50px;
+  flex-basis:100%;
+}
+
+.post .author img{
+  float: left;
+  width:50px;
+  border-radius:50px;
+}
+
+.post .author a{
+  font-size:1.5em;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left:10px;
+  line-height:50px;
+}
+
+.post .author a:visited{
+  color:#444;;
+}
+
+.post .postPhoto img{width:100%;}

@@ -20,11 +20,13 @@ function Post({post, solo}){
         }
     }, [post]);
 
-    //setting the authors name to display
+    //setting the authors name and image to display
     const [name, setName] = useState("");
+    const [authorImg, setAuthorImg] = useState("");
     useEffect(() =>{
         if(author){
             setName(author.displayName);
+            setAuthorImg(author.photoURL);
         }
     }, [author]);
 
@@ -33,11 +35,20 @@ function Post({post, solo}){
     
     return (
        <div className="post">
-           <p>Author: <a href={`/user/?user=${post.authorid}`}>{name}</a></p>
-           {/* load photo if there is one */}
-           {post.photo && <img alt="someting" src={`${post.photo}`}/>}
+           <div className="author">
+               <img src={`${authorImg}`} alt={`${name}'s profile image`}/>
+               <a href={`/user/?user=${post.authorid}`}>{name}</a>
+            </div>
+
            <p>{post.text}</p>
+
+            <div className="postPhoto">
+                {/* load photo if there is one */}
+                {post.photo && <img alt="someting" src={`${post.photo}`}/>}
+            </div>
+           
            <p>Category: {post.category}</p>
+           
            {solo != "true" && 
            <p><a href={`post/?post=${post.postid}`}>View Post</a></p>
             }
