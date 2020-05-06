@@ -68,6 +68,7 @@ body{
   font-weight: bold;
   margin-left:10px;
   line-height:50px;
+  color:#444;
 }
 
 .post .author a:visited{
