@@ -5,6 +5,8 @@ import {useHistory} from "react-router-dom";
 
 import Post from "../components/Post";
 
+import '../styles/Home.css';
+
 function Home(){
 
     /*--- URL Parameters ---*/

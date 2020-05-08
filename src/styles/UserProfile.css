@@ -1,0 +1,22 @@
+.profile{
+    display:flex;
+    align-items: center;
+    margin-top:50px;
+    width:100%;
+    background-color: #fff;
+}
+
+.profile .profileImg{
+    flex-basis:40%;
+    padding:20px;
+}
+
+.profile .profileImg img{
+    width:100%;
+    border-radius:20%;
+}
+
+.profile .profileDescription{
+    flex-basis:60%;
+    padding:20px;
+}

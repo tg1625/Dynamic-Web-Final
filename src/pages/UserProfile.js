@@ -4,6 +4,8 @@ import axios from "axios";
 import {useHistory} from "react-router-dom";
 import UserProfileComponents from '../components/UserProfileComponents';
 
+import '../styles/UserProfile.css';
+
 function UserProfile(){
     //console.log({userInfo});
    /*--- URL Parameters ---*/
@@ -39,28 +41,20 @@ function UserProfile(){
             .catch(function(error){
                 console.log(error);
             })
-        }else{ //all posts 
-            axios.get(
-                `https://nameless-fjord-65777.herokuapp.com/user/${user}`
-                )
-            .then(function(response){
-                setProfile(response.data);
-                console.log("Response", response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            })
         }
     }, [user]);
 
     return (
         <div className="profile">
-            <h1>User Profile</h1>
-            <img alt="Profile" src={`${profile.photoURL}`}/>
-            <p>{profile.displayName}</p>
-            <p>Switch Code:{profile.switchcode}</p>
-            <p>{profile.hemisphere} Hemisphere</p>
-            <p>Fruit: {profile.fruit}</p>
+            <div className="profileImg">
+                <img alt="Profile" src={`${profile.photoURL}`}/>
+            </div>
+            <div className="profileDescription">
+                <h2>{profile.displayName}</h2>
+                <p><strong>Switch Code:</strong>{profile.switchcode}</p>
+                <p><strong>Fruit:</strong>{profile.fruit}</p>
+                <p>{profile.hemisphere} Hemisphere</p>
+            </div>
             {/* //<UserProfileComponents email={userInfo.email}/> */}
         </div>
     )
