@@ -12,9 +12,25 @@ body{
   padding:20px;
 }
 
+button{
+  text-align: center;
+  padding:10px;
+  border:1px solid #aaa;
+  border-radius:1em;
+  background-color: #7F90FF;
+  color:#fff;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover{
+  background-color: #6674CC;
+  cursor: pointer;
+} 
+
 /* ---- FORMS --- */
 .forms{
-  max-width:500px;
+  width:500px;
   display:flex;
   flex-direction: column;
   margin:40px auto;
@@ -28,17 +44,7 @@ body{
 .forms button{
   flex-basis:100%;
   margin-top:10px;
-  text-align: center;
-  padding:10px;
-  border:1px solid #aaa;
-  border-radius:1em;
-  background-color: #7F90FF;
-  color:#fff;
-  font-weight: bold;
-  transition: all 0.2s ease-in-out;
 }
-
-.forms button:hover{background-color: #6674CC;}
 
 
 

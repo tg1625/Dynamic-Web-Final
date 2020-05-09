@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 
 import '../styles/UserProfile.css';
 
-function UserProfile(){
+function UserProfile({authid}){
     //console.log({userInfo});
    /*--- URL Parameters ---*/
     //setting the post categories
@@ -47,6 +47,9 @@ function UserProfile(){
         <div className="profile">
             <div className="profileImg">
                 <img alt="Profile" src={`${profile.photoURL}`}/>
+                {authid == user &&
+                <a href="/update-profile">Edit Profile</a>
+                }
             </div>
             <div className="profileDescription">
                 <h2>{profile.displayName}</h2>

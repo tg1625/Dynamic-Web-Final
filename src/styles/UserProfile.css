@@ -20,3 +20,22 @@
     flex-basis:60%;
     padding:20px;
 }
+
+
+.profile .profileImg a{
+    display:inline-block;
+  width:100%;
+  flex-basis:100%;
+  margin-top:10px;
+  text-align: center;
+  padding:10px;
+  border:1px solid #aaa;
+  border-radius:1em;
+  background-color: #7F90FF;
+  font-weight:bold;
+  text-decoration: none;
+  color:#fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile .profileImg a:hover{background-color: #6674CC;}

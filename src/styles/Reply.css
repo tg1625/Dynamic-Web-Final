@@ -2,6 +2,13 @@
 .replies{margin-top:20px;}
 
 
+/*-- Creating a reply -- */
+.reply .forms{
+    margin:0;
+    width:100%;
+}
+
+
 .reply{
     display:flex;
     width:100%;

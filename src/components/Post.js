@@ -4,7 +4,7 @@ import axios from "axios";
 import Reply from "./Reply.js";
 import "../styles/Reply.css";
 
-function Post({post, solo}){
+function Post({userInfo, post, solo, CreateReplyFunction}){
     //getting author of the post
     const [author, setAuthor] = useState({});
     const [replies, setReplies] = useState([]);
@@ -16,21 +16,23 @@ function Post({post, solo}){
                 )
             .then(function(response){
                 setAuthor(response.data);
-                console.log("Author is: ", response.data);
+                // console.log("Author is: ", response.data);
             })
             .catch(function(error){
                 console.log(error);
             });
-            axios.get(
-                `https://nameless-fjord-65777.herokuapp.com/replies/${post.postid}`
-                )
-            .then(function(response){
-                setReplies(response.data);
-                console.log("Replies are: ", response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            });
+            if(solo){
+                axios.get(
+                    `https://nameless-fjord-65777.herokuapp.com/replies/${post.postid}`
+                    )
+                .then(function(response){
+                    setReplies(response.data);
+                    // console.log("Replies are: ", response.data);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+            }
         }
     }, [post]);
 
@@ -61,13 +63,26 @@ function Post({post, solo}){
 
                     {/* Load link to post if on the home page */}
                     {solo !== "true" && 
-                    <div className="postLink"><a href={`post/?post=${post.postid}`}>View Post</a></div>
+                    <a className="postLink" href={`post/?post=${post.postid}`}>View Post</a>
                     }
                 </div>
             </div>
     
             {/* Load replies if on the post page */}
             <div className="replies">
+                {userInfo && "uid" in userInfo &&
+                    <div className="reply">
+                        <div className="photo">
+                            <img src={`${userInfo.photoURL}`} alt={`${userInfo.displayName}'s profile`}/>    
+                        </div>
+                        <div className="text">
+                            <form className="forms" onSubmit={(formValues) => CreateReplyFunction(formValues, post.postid)}>
+                                <input type="text" name="replyText" placeholder="Reply here"/>
+                                <button type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                }
                 {solo === "true" &&
                     replies && replies.slice(0).reverse().map((r,i) => (
                     <Reply reply={r} displayName={name} profileImg={authorImg} key={i}/>

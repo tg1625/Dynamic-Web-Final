@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 
 import Post from '../components/Post';
 
-function ViewPost(){
+function ViewPost({userInfo, CreateReplyFunction}){
    /*--- URL Parameters ---*/
    const [postID,setPostID] = useState(""); //URL search parameter
     //setting the post categories
@@ -43,7 +43,7 @@ function ViewPost(){
 
     return (
         <div>
-            <Post post={post} solo="true"/>
+            <Post userInfo={userInfo} post={post} CreateReplyFunction={CreateReplyFunction} solo="true"/>
         </div>
     )
 

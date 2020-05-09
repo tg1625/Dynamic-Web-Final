@@ -7,7 +7,7 @@ import Post from "../components/Post";
 
 import '../styles/Home.css';
 
-function Home(){
+function Home({userInfo}){
 
     /*--- URL Parameters ---*/
     //setting the post categories

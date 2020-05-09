@@ -161,6 +161,18 @@ function App() {
     .catch(function(error){
       console.log(Error);
     });
+
+    //updating actual profile in the firebase auth
+    var user = firebase.auth().currentUser;
+
+    user.updateProfile({
+      displayName: updates.displayName,
+      photoURL: updates.photoURL
+    }).then(function() {
+      // Update successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
   }
 
 
@@ -182,6 +194,22 @@ function App() {
     });
   }
 
+  function CreateReplyFunction(e, postid){
+    e.preventDefault();
+    let text = e.currentTarget.replyText.value;
+    let user = userInfo.uid;
+    axios.get(
+      `https://nameless-fjord-65777.herokuapp.com/reply?text=${text}&authorid=${user}&postid=${postid}`
+    )
+    .then(function (response){
+      console.log(response);
+    })
+    .catch(function(error){
+      console.log(Error);
+    });
+    window.location.reload();
+  }
+
   //console.log("Logged in?", loggedIn);
 
   return (
@@ -197,7 +225,7 @@ function App() {
               !loggedIn ? (<Redirect to="login"/>) : (<Home/>)
               //if not logged in log in, if logged in go to profile
               } */}
-              <Home />
+              <Home userInfo={userInfo} />
           </Route>
           <Route exact path="/login">
             { 
@@ -215,10 +243,11 @@ function App() {
           </Route>
           <Route exact path="/user">
               {/*If not loading, can see the different pages */}
-              <UserProfile />
+              {!loggedIn ? <UserProfile/> :  <UserProfile authid={userInfo.uid} />}
+              
           </Route>
           <Route exact path="/post">
-            <ViewPost />
+            <ViewPost userInfo={userInfo} CreateReplyFunction={CreateReplyFunction} />
           </Route>
           <Route exact path="/createPost">
               {/*If not loading, can see the different pages */}
