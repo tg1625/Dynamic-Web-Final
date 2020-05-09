@@ -107,6 +107,7 @@ function App() {
     .then(function() {
       console.log("Signed out!");
       SetLoggedIn(false);
+      window.location.href = "/login";
     })
     .catch(function(error) {
       // An error happened.
@@ -146,7 +147,7 @@ function App() {
     //creating the query based on what the user wanted to change
     var query = `https://nameless-fjord-65777.herokuapp.com/update?id=${userInfo.uid}`;
     for (const field in updates) {
-      if(updates[field] != ""){
+      if(updates[field] !== ""){
         query+=`&${field}=${updates[field]}`;  
       }
     }
@@ -214,10 +215,6 @@ function App() {
           </Route>
           <Route exact path="/user">
               {/*If not loading, can see the different pages */}
-              {/* {
-              !loggedIn ? (<Redirect to="login"/>) : (<UserProfile userInfo={userInfo}/>)
-              //if not logged in log in, if logged in go to profile
-              } */}
               <UserProfile />
           </Route>
           <Route exact path="/post">

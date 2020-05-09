@@ -1,36 +1,59 @@
 
 /*---- Posts Wrapper --- */
 .post{
-    display:flex;
-    flex-direction: column;
-    width:100%;
-    padding:20px;
-    background-color: #fff;
-    margin-bottom:20px;
-  }
-  
-  .post .author {
-    height: 50px;
-    flex-basis:100%;
-  }
-  
-  .post .author img{
-    float: left;
-    width:50px;
-    border-radius:50px;
-  }
-  
-  .post .author a{
-    font-size:1.5em;
-    text-decoration: none;
-    font-weight: bold;
-    margin-left:10px;
-    line-height:50px;
-    color:#444;
-  }
-  
-  .post .author a:visited{
-    color:#444;;
-  }
-  
-  .post .postPhoto img{width:100%;}
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  margin:20px 0;
+  padding:20px;
+  background-color: #fff;
+}
+
+.post .content{
+  flex-basis:100%;
+  display:flex;
+}
+
+.post .content .photo{
+   flex-basis:10%;
+}
+.post .content .photo img{
+  width:50px;
+  border-radius:50px;
+}
+
+.post .content .text{
+  flex-basis:80%;
+}
+
+.post .text .name{
+  font-size:1.2em;
+  text-decoration: none;
+  font-weight: bold;
+  line-height:50px;
+  color:#444;
+}
+.post .content .postPhoto img{
+  width:100%;
+  border-radius:1em;
+}
+
+.post .content .postLink{
+  flex-basis:100%;
+  margin-top:10px;
+  text-align: center;
+  padding:10px;
+  border:1px solid #aaa;
+  border-radius:1em;
+  background-color: #7F90FF;
+  color:#fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.post .content .postLink:hover{background-color: #6674CC;}
+
+.post .content .postLink a{
+  font-weight:bold;
+  text-decoration: none;
+  color:#fff;
+}

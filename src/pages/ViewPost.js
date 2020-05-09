@@ -6,10 +6,9 @@ import {useHistory} from "react-router-dom";
 import Post from '../components/Post';
 
 function ViewPost(){
-    //console.log({userInfo});
    /*--- URL Parameters ---*/
+   const [postID,setPostID] = useState(""); //URL search parameter
     //setting the post categories
-    const [postID,setPostID] = useState(""); //URL search parameter
     let history = useHistory();
     //get league from URL
     useEffect(() =>{
@@ -21,14 +20,14 @@ function ViewPost(){
         console.log("PostID is ", p);
         if(p){
             setPostID(p);
-        };
+        }
         }
     }, [history])
 
     //get API data
     const [post, setPost] = useState({}); //match data
     useEffect(() =>{   
-        if(post){ //posts with specific category
+        if(postID){ //posts with specific category
             axios.get(
                 `https://nameless-fjord-65777.herokuapp.com/post/${postID}`
                 )
@@ -40,11 +39,10 @@ function ViewPost(){
                 console.log(error);
             })
         }
-    }, [postID, post]);
+    }, [postID]);
 
     return (
         <div>
-            <h1>Post</h1>
             <Post post={post} solo="true"/>
         </div>
     )

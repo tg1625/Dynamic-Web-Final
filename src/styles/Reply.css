@@ -1,0 +1,31 @@
+/*---- Reply Wrapper --- */
+.replies{margin-top:20px;}
+
+
+.reply{
+    display:flex;
+    width:100%;
+    padding:20px 10px;
+    background-color: #fff;
+    border-top:1px solid #aaa;
+  }
+  
+.reply .photo{
+     flex-basis:10%;
+ }
+.reply .photo img{
+    width:50px;
+    border-radius:50px;
+}
+
+.reply .text{
+    flex-basis:90%;
+}
+  
+.reply .text .name{
+    font-size:1.2em;
+    text-decoration: none;
+    font-weight: bold;
+    line-height:50px;
+    color:#444;
+}

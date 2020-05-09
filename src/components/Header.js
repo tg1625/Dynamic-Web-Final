@@ -10,7 +10,7 @@ function Header({LogOutFunction, isLoggedIn}){
                 {/* Logged In */}
                 {isLoggedIn && <a href="/">Home</a>}
                 {isLoggedIn && <a href="/createPost">Create Post</a>}
-                {isLoggedIn && <button onClick={() => LogOutFunction()}>Logout</button>}
+                {isLoggedIn && <a onClick={() => LogOutFunction()}>Logout</a>}
             </nav>
         </header>
     )

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-function Post({post, solo}){
+import Reply from "./Reply.js";
+import "../styles/Reply.css";
 
-    //testing out a loading type of thing
-    const [loading,setLoading] = useState(true);
+function Post({post, solo}){
     //getting author of the post
     const [author, setAuthor] = useState({});
+    const [replies, setReplies] = useState([]);
     useEffect(() =>{   
         if(post){ //posts with specific category
             //console.log(`Testing URL https://nameless-fjord-65777.herokuapp.com/user/${post.authorid}`);
@@ -19,7 +20,17 @@ function Post({post, solo}){
             })
             .catch(function(error){
                 console.log(error);
+            });
+            axios.get(
+                `https://nameless-fjord-65777.herokuapp.com/replies/${post.postid}`
+                )
+            .then(function(response){
+                setReplies(response.data);
+                console.log("Replies are: ", response.data);
             })
+            .catch(function(error){
+                console.log(error);
+            });
         }
     }, [post]);
 
@@ -30,38 +41,43 @@ function Post({post, solo}){
         if(author){
             setName(author.displayName);
             setAuthorImg(author.photoURL);
-            setLoading(false);
         }
     }, [author]);
 
-
-    if(!loading){
-        return (
-            <div className="post">
-                <div className="author">
-                    <img src={`${authorImg}`} alt={`${name}'s profile`}/>
-                    <a href={`/user/?user=${post.authorid}`}>{name}</a>
-                    </div>
-
-                <p>{post.text}</p>
+    return (
+        <div className="post">
+            <div className="content">
+                <div className="photo">
+                    <img src={`${authorImg}`} alt={`${name}'s profile`}/>    
+                </div>
+                <div className="text">
+                    <a className="name" href={`/user/?user=${post.authorid}`}>{name}</a>
+                    <p>{post.text}</p>
 
                     <div className="postPhoto">
                         {/* load photo if there is one */}
                         {post.photo && <img alt="someting" src={`${post.photo}`}/>}
                     </div>
-                
-                {/* <p>Category: {post.category}</p> */}
-                
-                {solo !== "true" && 
-                <p><a href={`post/?post=${post.postid}`}>View Post</a></p>
+
+                    {/* Load link to post if on the home page */}
+                    {solo !== "true" && 
+                    <div className="postLink"><a href={`post/?post=${post.postid}`}>View Post</a></div>
                     }
+                </div>
             </div>
-        )
-    }else{
-        return(
-            <div>Loading.....</div>
-        )
-    }
+    
+            {/* Load replies if on the post page */}
+            <div className="replies">
+                {solo === "true" &&
+                    replies && replies.slice(0).reverse().map((r,i) => (
+                    <Reply reply={r} displayName={name} profileImg={authorImg} key={i}/>
+                    ))
+                }
+            </div>
+
+
+        </div>
+    )
 }
 
 export default Post;

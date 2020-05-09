@@ -3,9 +3,8 @@ import React from 'react';
 
 function UpdateProfileForm({ UpdateProfileFunction }){
     return (
-        <div>   
+        <div>  
             <form className="forms" onSubmit={(formValues) => UpdateProfileFunction(formValues)}>
-                <h3>Create an Account</h3>
                 <label htmlFor="displayName">Display Name</label>
                 <input type="text" name="displayName" placeholder="What's your name?"/>
                 <label htmlFor="photoURL">Profile Photo</label>
