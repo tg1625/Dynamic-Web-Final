@@ -71,7 +71,7 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
 
                     {/* Load link to post if on the home page */}
                     {solo !== "true" && 
-                    <a className="postLink" href={`post/?post=${post.postid}`}>View Replies</a>
+                    <a className="postLink" href={`/post/?post=${post.postid}`}>View Replies</a>
                     }
                 </div>
             </div>
