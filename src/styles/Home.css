@@ -1,3 +1,36 @@
+/*----User Info/Post Stuff ---*/
+.dashboard .userHeader{
+  background-color: white;
+  padding:20px;
+  margin-top:20px;
+}
+
+.dashboard .userHeader .userInfo{display:flex;}
+.dashboard .userHeader .userImg{flex-basis:10%;}
+.dashboard .userHeader img{
+  width:50px;
+  border-radius: 50px;;
+}
+
+.dashboard .userHeader .userName{
+  flex-basis:80%;
+  margin-bottom:0;
+}
+
+.dashboard .userHeader .userName a{
+  font-size:1.2em;
+  text-decoration: none;
+  font-weight: bold;
+  line-height:50px;
+  color:#444;
+}
+
+.dashboard .forms{
+  width:100%;
+  padding:0;
+  margin:20px 0;
+}
+
 
 /*---- Posts Wrapper --- */
 .post{

@@ -4,6 +4,7 @@ import axios from "axios";
 import {useHistory} from "react-router-dom";
 
 import '../styles/UserProfile.css';
+import Post from '../components/Post';
 
 function UserProfile({authid}){
     //console.log({userInfo});
@@ -28,6 +29,7 @@ function UserProfile({authid}){
 
     //get API data
     const [profile, setProfile] = useState([]); //match data
+    const [posts, setPosts] = useState([]); //posts for that user
     useEffect(() =>{   
         if(user){ //posts with specific category
             axios.get(
@@ -39,15 +41,27 @@ function UserProfile({authid}){
             })
             .catch(function(error){
                 console.log(error);
+            });
+            axios.get(
+                `https://nameless-fjord-65777.herokuapp.com/post/user/${user}`
+                )
+            .then(function(response){
+                setPosts(response.data);
+                console.log("Posts: ", response.data);
             })
+            .catch(function(error){
+                console.log(error);
+            });
         }
     }, [user]);
+ 
 
     return (
+        <div>
         <div className="profile">
             <div className="profileImg">
                 <img alt="Profile" src={`${profile.photoURL}`}/>
-                {authid == user &&
+                {authid === user &&
                 <a href="/update-profile">Edit Profile</a>
                 }
             </div>
@@ -57,7 +71,13 @@ function UserProfile({authid}){
                 <p><strong>Fruit:</strong> {profile.fruit}</p>
                 <p>{profile.hemisphere} Hemisphere</p>
             </div>
-            {/* //<UserProfileComponents email={userInfo.email}/> */}
+        </div>
+
+        <div className="postsWrapper">
+        {posts && posts.map((p,i) => (
+            <Post post={p} key={i}/>
+        ))}
+        </div>
         </div>
     )
 }

@@ -1,18 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 *{box-sizing: border-box;}
 
 body{
   background-color:#efefef;
+  font-family:'Roboto', sans-serif;
   font-size:16px;
   color:#444;
+}
+
+.loading {
+  margin: 0;
+  position: absolute;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #7F90FF;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .siteWrapper{
   max-width:768px;
   margin:0 auto;
   padding:20px;
+  animation: fadeInAnimation ease 2s; 
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
 }
+ 
+
+@keyframes fadeInAnimation { 
+  0% { 
+      opacity: 0; 
+  } 
+  100% { 
+      opacity: 1; 
+   } 
+} 
 
 button{
+  font:inherit;
   text-align: center;
   padding:10px;
   border:1px solid #aaa;
@@ -30,6 +66,8 @@ button:hover{
 
 /* ---- FORMS --- */
 .forms{
+  background-color:white;
+  padding:20px;
   width:500px;
   display:flex;
   flex-direction: column;
@@ -39,6 +77,9 @@ button:hover{
 .forms input{
   margin-bottom:10px;
   line-height: 2em;
+  border:1px solid #aaa;
+  padding:5px;
+  border-radius:1em;
 }
 
 .forms button{
@@ -58,7 +99,10 @@ button:hover{
   background-color: #fff;
 }
 
-.header_nav a{
+.header_nav a, .header_nav button{
+  background-color: transparent;
+  border-radius: 0;
+  border:none;
   color:#444;
   display:block;
   padding:10px;
@@ -69,7 +113,7 @@ button:hover{
   transition: all 0.2s ease-in-out;
 }
 
-.header_nav a:hover{
+.header_nav a:hover, .header_nav button:hover{
   cursor: pointer;
   border-bottom:2px solid #6674CC;
 }

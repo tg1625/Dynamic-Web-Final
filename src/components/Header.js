@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header({LogOutFunction, isLoggedIn}){
+function Header({LogOutFunction, isLoggedIn, userInfo}){
     return(
         <header>
             <nav className="header_nav">
@@ -8,9 +8,9 @@ function Header({LogOutFunction, isLoggedIn}){
                 {!isLoggedIn && <a href="/create-account">Create Account</a>}
                 {!isLoggedIn &&<a href="/login">Login</a>}
                 {/* Logged In */}
-                {isLoggedIn && <a href="/">Home</a>}
-                {isLoggedIn && <a href="/createPost">Create Post</a>}
-                {isLoggedIn && <a onClick={() => LogOutFunction()}>Logout</a>}
+                {isLoggedIn && <a style={{float: "left"}}href="/">Home</a>}
+                {isLoggedIn && userInfo && <a href={`/user/?user=${userInfo.uid}`}>Profile</a>}
+                {isLoggedIn && <button onClick={() => LogOutFunction()}>Logout</button>}
             </nav>
         </header>
     )

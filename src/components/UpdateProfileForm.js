@@ -8,7 +8,7 @@ function UpdateProfileForm({ UpdateProfileFunction }){
                 <label htmlFor="displayName">Display Name</label>
                 <input type="text" name="displayName" placeholder="What's your name?"/>
                 <label htmlFor="photoURL">Profile Photo</label>
-                <input type="text" name="photoURL" placeholder="URL to your photo here!"/>
+                <input type="file" accept="image/*" name="photoURL" placeholder="Link to a photo here!"/>
                 <label htmlFor="fruit">Native Fruit</label>
                 <input type="text" name="fruit" placeholder="Fruit"/>
                 <label htmlFor="hemisphere">Hemisphere</label>

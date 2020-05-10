@@ -8,6 +8,7 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
     //getting author of the post
     const [author, setAuthor] = useState({});
     const [replies, setReplies] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() =>{   
         if(post){ //posts with specific category
             //console.log(`Testing URL https://nameless-fjord-65777.herokuapp.com/user/${post.authorid}`);
@@ -16,7 +17,7 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
                 )
             .then(function(response){
                 setAuthor(response.data);
-                // console.log("Author is: ", response.data);
+                console.log("Author is: ", response.data);
             })
             .catch(function(error){
                 console.log(error);
@@ -34,7 +35,7 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
                 });
             }
         }
-    }, [post]);
+    }, [post, solo]);
 
     //setting the authors name and image to display
     const [name, setName] = useState("");
@@ -44,7 +45,14 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
             setName(author.displayName);
             setAuthorImg(author.photoURL);
         }
+        setLoading(false);
     }, [author]);
+
+    if(loading){
+        return( 
+            <div className="loading"></div>
+        )
+     }
 
     return (
         <div className="post">
@@ -63,7 +71,7 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
 
                     {/* Load link to post if on the home page */}
                     {solo !== "true" && 
-                    <a className="postLink" href={`post/?post=${post.postid}`}>View Post</a>
+                    <a className="postLink" href={`post/?post=${post.postid}`}>View Replies</a>
                     }
                 </div>
             </div>
@@ -84,7 +92,7 @@ function Post({userInfo, post, solo, CreateReplyFunction}){
                     </div>
                 }
                 {solo === "true" &&
-                    replies && replies.slice(0).reverse().map((r,i) => (
+                    replies && replies.map((r,i) => (
                     <Reply reply={r} displayName={name} profileImg={authorImg} key={i}/>
                     ))
                 }

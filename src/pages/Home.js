@@ -1,47 +1,17 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-import {useHistory} from "react-router-dom";
-
 import Post from "../components/Post";
+import CreatePostForm from "../components/CreatePostForm";
 
 import '../styles/Home.css';
 
-function Home({userInfo}){
-
-    /*--- URL Parameters ---*/
-    //setting the post categories
-    const [category,setCategory] = useState(""); //URL search parameter
-    let history = useHistory();
-    //get league from URL
-    useEffect(() =>{
-        if(history){
-            //get search parameters
-        let searchParams = history.location.search;
-        const urlParams = new URLSearchParams(searchParams);
-        let category = urlParams.get("category");
-        if(category){
-            setCategory(category);
-        }
-        //console.log("League is", league);
-        }
-    }, [history])
+function Home({userInfo, CreatePostFunction}){
 
     //get API data
     const [posts, setPosts] = useState([]); //match data
     useEffect(() =>{   
-        if(category){ //posts with specific category
-            axios.get(
-                `https://nameless-fjord-65777.herokuapp.com/`
-                )
-            .then(function(response){
-                setPosts(response.data);
-                console.log("Posts: ", response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        }else{ //all posts 
+        if(userInfo){ //posts with specific category
             axios.get(
                 `https://nameless-fjord-65777.herokuapp.com/`
                 )
@@ -53,17 +23,23 @@ function Home({userInfo}){
                 console.log(error);
             })
         }
-    }, [category]);
+    }, [userInfo]);
 
 
     return (
-        <div>
-            <h1>Home Page</h1>
+        <div className="dashboard">
+            <div className="userHeader">
+                <div className="userInfo">
+                    <div className="userImg"><img src={`${userInfo.photoURL}`} alt={`${userInfo.displayName}`}/></div>
+                    <div className="userName"><a href={`/user/?user=${userInfo.uid}`}>{userInfo.displayName}</a></div>
+                </div>
+                <CreatePostForm CreatePostFunction={CreatePostFunction}/>
+            </div>
             <div className="postsWrapper">
-                    {posts && posts.slice(0).reverse().map((p,i) => (
+                    {posts && posts.map((p,i) => (
                         <Post post={p} key={i}/>
                 ))}
-                </div>
+            </div>
         </div>
     )
 }
